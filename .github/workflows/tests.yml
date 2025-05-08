@@ -18,6 +18,8 @@ jobs:
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
+    - name: Install package
+      run: pip install -e .
     - name: Run tests
       run: python -m pytest tests/test_ecommerce.py --html=report.html
     - name: Upload report
