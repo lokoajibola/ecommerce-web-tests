@@ -1,7 +1,8 @@
 import pytest
 from selenium import webdriver
 from pages.login_page import LoginPage
-from pages.inventory_page import InventoryPage
+from ecommerce-web-tests.pages.login_page import LoginPage  # Assuming your package is named 'ecommerce'
+#from pages.inventory_page import InventoryPage
 from selenium.webdriver.common.by import By
 
 
