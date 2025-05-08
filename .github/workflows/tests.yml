@@ -21,7 +21,9 @@ jobs:
     - name: Install package
       run: pip install -e .
     - name: Run tests
-      run: python -m pytest tests/test_ecommerce.py --html=report.html
+      run: |
+          export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
+          pytest
     - name: Upload report
       uses: actions/upload-artifact@v4
       with:
