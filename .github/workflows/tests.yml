@@ -32,6 +32,9 @@ jobs:
       run: |
         pip install -e .
         export PYTHONPATH=$PYTHONPATH:${{ github.workspace }}
+
+    - name: Debug PYTHONPATH
+      run: echo "PYTHONPATH is $PYTHONPATH"
     
     - name: Run tests
       run: |
