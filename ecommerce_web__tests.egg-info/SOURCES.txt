@@ -1,0 +1,7 @@
+README.md
+setup.py
+ecommerce_web__tests.egg-info/PKG-INFO
+ecommerce_web__tests.egg-info/SOURCES.txt
+ecommerce_web__tests.egg-info/dependency_links.txt
+ecommerce_web__tests.egg-info/top_level.txt
+tests/test_ecommerce.py
