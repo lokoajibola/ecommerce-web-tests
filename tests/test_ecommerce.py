@@ -1,7 +1,8 @@
 import pytest
+import time
 from selenium import webdriver
-# from ..pages.login_page import LoginPage
-from ecommerce_web_tests.pages.login_page import LoginPage  # Assuming your package is named 'ecommerce'
+from pages.login_page import LoginPage
+# from ecommerce_web_tests.pages.login_page import LoginPage  # Assuming your package is named 'ecommerce'
 from pages.inventory_page import InventoryPage
 from selenium.webdriver.common.by import By
 
@@ -23,5 +24,7 @@ def test_ecommerce_flow(driver):
     inventory_page = InventoryPage(driver)
     inventory_page.add_item_to_cart()
     inventory_page.go_to_cart()
+    time.sleep(2)
     assert driver.find_element(By.CLASS_NAME, "cart_quantity").text == "1"
+    # assert driver.find_element(By.XPATH, "//div[contains(@class, 'cart_quantity')]").text == "1"
     print("E-commerce flow test passed!")
