@@ -4,45 +4,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4  # Updated to v4
-    
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-    
-    - name: Install system dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        
-    - name: Install Chrome
-      run: |
-        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-        echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-    
-    - name: Install Python dependencies
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium pytest pytest-html webdriver-manager chromedriver-autoinstaller
+        pip install selenium pytest pytest-html chromedriver-autoinstaller
     
-    - name: Install package
+    - name: Install Chrome
       run: |
-        pip install -e .
-        export PYTHONPATH=$PYTHONPATH:${{ github.workspace }}
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
-    - name: Debug PYTHONPATH
-      run: echo "PYTHONPATH is $PYTHONPATH"
-    
     - name: Run tests
-      run: |
-        python -m pytest --html=report.html --self-contained-html
-    
+      run: pytest tests/test_ecommerce.py --html=reports/report.html
+
+
+    - name: Run tests
+      run: pytest tests/test_ecommerce.py --html=report.html
     - name: Upload report
-      if: always()  # Upload report even if tests fail
       uses: actions/upload-artifact@v4
       with:
-        name: pytest-report
+        name: test-report
         path: report.html
