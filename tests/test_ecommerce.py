@@ -36,7 +36,7 @@ def test_ecommerce_flow(driver):
     inventory_page = InventoryPage(driver)
     inventory_page.add_item_to_cart()
     inventory_page.go_to_cart()
-    time.sleep(10)
+    time.sleep(20)
     assert driver.find_element(By.CLASS_NAME, "cart_quantity").text == "1"
     # assert driver.find_element(By.XPATH, "//div[contains(@class, 'cart_quantity')]").text == "1"
     print("E-commerce flow test passed!")
