@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 @pytest.fixture
 def driver():
     driver = webdriver.Chrome()
+    time.sleep(5)
     driver.get("https://www.saucedemo.com/")
     yield driver
     driver.quit()
