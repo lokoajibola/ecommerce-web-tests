@@ -5,12 +5,23 @@ from pages.login_page import LoginPage
 # from ecommerce_web_tests.pages.login_page import LoginPage  # Assuming your package is named 'ecommerce'
 from pages.inventory_page import InventoryPage
 from selenium.webdriver.common.by import By
+import chromedriver_autoinstaller
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Automatically download and install matching chromedriver
 
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
-    time.sleep(5)
+    chromedriver_autoinstaller.install()
+
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
     driver.get("https://www.saucedemo.com/")
     yield driver
     driver.quit()
