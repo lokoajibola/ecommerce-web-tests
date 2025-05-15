@@ -25,9 +25,28 @@ jobs:
 
     - name: Run tests
       run: pytest tests/test_ecommerce.py --alluredir=reports/allure-results
-      
-    - name: Upload report
+
+    
+    - name: Upload Allure results
       uses: actions/upload-artifact@v4
       with:
-        name: test-report
-        path: report.html
+        name: allure-results
+        path: reports/allure-results
+    - name: Generate Allure report
+      if: always()
+      uses: simple-elf/allure-report-action@master
+      with:
+        allure_results: reports/allure-results
+        allure_report: reports/allure-report
+    - name: Deploy report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: reports/allure-report
+      
+    # - name: Upload report
+    #   uses: actions/upload-artifact@v4  
+    #   with:
+    #     name: test-report
+    #     path: report.html
